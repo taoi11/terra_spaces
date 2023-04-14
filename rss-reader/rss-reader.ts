@@ -40,9 +40,6 @@ async function rssReader() {
   const existingUrls = await fetchExistingUrls(client);
   const rssItems = await getRssFeed();
 
-  // Reverse the order of the rssItems array to add the oldest item first 
-  rssItems.reverse();
-
   console.log(`Fetched ${rssItems.length} items from RSS feed.`);
   console.log(`Found ${existingUrls.length} existing URLs in the database.`);
 
@@ -54,7 +51,7 @@ async function rssReader() {
 
     if (!existingUrls.includes(enclosureUrl)) {
       await insertNewEntry(client, title, enclosureUrl);
-      newEntries.push(`Inserted new entry: ${title} ()`);
+      newEntries.push(`Inserted new entry: ${title} (${enclosureUrl})`);
     }
   }
 
@@ -65,11 +62,12 @@ async function rssReader() {
 async function main() {
   console.log('Starting main function...');
   const newEntries = await rssReader();
+  newEntries.reverse();
   for (const entry of newEntries) {
     console.log(entry);
   }
   console.log('Main function completed. Scheduling next run...');
-  setTimeout(main, 60 * 60 * 1000);
+  setTimeout(main, 60 * 60);
 }
 
 main();

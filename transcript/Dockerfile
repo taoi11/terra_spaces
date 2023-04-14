@@ -1,11 +1,14 @@
 # Use the official Python image as the base image
-FROM python:3.9
+FROM python:3.9-slim
 
 # Set the working directory
 WORKDIR /app
 
+COPY requirements.txt .
+
+
 # Install required libraries
-RUN pip install --no-cache-dir psycopg2-binary wget requests
+RUN pip install -r requirements.txt
 
 # Set the environment variables for the database and transcribe API URLs
 ENV DB_URL=your_database_url

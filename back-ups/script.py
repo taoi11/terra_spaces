@@ -74,5 +74,5 @@ if __name__ == "__main__":
 
     while True:
         last_processed_id = job(initial_id, last_processed_id)
-        print("Sleeping for 3600 seconds...")
-        time.sleep(60*60)
+        print("Sleeping for 300 seconds...")
+        time.sleep(300)
