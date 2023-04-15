@@ -2,7 +2,7 @@
 
 ### [rss-reader](https://github.com/taoi11/terra_spaces/tree/main/rss-reader)
 
-This script pulls the rss feed from [Terraspcaes](https://terraspaces.org/feed/podcast/) every hour. Checks for the  new audio publications. Then update the database by adding new rows.
+This script pulls the rss feed from [Terraspcaes](https://terraspaces.org/feed/podcast/). Checks for new audio publications. Then update the database by adding new rows.
 
 ### [transcript](https://github.com/taoi11/terra_spaces/tree/main/transcript)
 
