@@ -1,2 +1,17 @@
-# rss-reader
-Docs are a work in progress
+# Terraspaces and AI
+
+### [rss-reader](https://github.com/taoi11/terra_spaces/tree/main/rss-reader)
+
+This script pulls the rss feed from [Terraspcaes](https://terraspaces.org/feed/podcast/). Checks for the  new audio publications. Then update the database by adding new rows.
+
+### [transcript](https://github.com/taoi11/terra_spaces/tree/main/transcript)
+
+This script calls a self-hosted [whisper](https://github.com/ahmetoner/whisper-asr-webservice) model to get a transcript of the audio.
+
+### [back-up](https://github.com/taoi11/terra_spaces/tree/main/back-ups)
+
+This script reads the database for new entires. Then uploads audio files to a S3 buckets on hosted on the [Stoj.io](https://www.storj.io/solution-brief/s3-compatibility)
+
+#### Thanks OpenAI
+
+All code is written and debugged by ChatGPT I am no dev. 
