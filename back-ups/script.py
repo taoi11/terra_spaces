@@ -20,13 +20,13 @@ def connect_to_db():
 def get_latest_id(conn):
     print("Getting the latest record ID...")
     with conn.cursor() as cur:
-        cur.execute("SELECT MAX(id) FROM terra_spaces;")
+        cur.execute("SELECT MAX(id) FROM terra_audio;")
         return cur.fetchone()[0]
 
 def get_newest_records(conn, last_processed_id):
     print("Getting new records...")
     with conn.cursor() as cur:
-        cur.execute("SELECT url, title FROM terra_spaces WHERE id > %s;", (last_processed_id,))
+        cur.execute("SELECT url, title FROM terra_audio WHERE id > %s;", (last_processed_id,))
         return cur.fetchall()
 
 def upload_to_s3(audio_file_path, title):
@@ -74,5 +74,5 @@ if __name__ == "__main__":
 
     while True:
         last_processed_id = job(initial_id, last_processed_id)
-        print("Sleeping for 300 seconds...")
-        time.sleep(300)
+        print("Sleeping for 600 seconds...")
+        time.sleep(600)
