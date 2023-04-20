@@ -25,20 +25,25 @@ def update_embeddings():
     cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema='public';")
     existing_tables = [t[0] for t in cursor.fetchall()]
 
+    # Initialize a set to store processed tables in the current run
+    processed_tables = set()
+
     # Process each row
     for row in rows:
         title = row[1]
         transcript = row[5]
-        table_name = title.replace(" ", "_")
+        table_name = title.replace(" ", "_")[:63]  # Truncate the table name to a maximum of 63 characters
 
         if transcript is None:
             print(f"Skipping row with empty transcript: '{title}'")
             continue
 
-        if table_name not in existing_tables:
-            # Table does not exist, create it and store embeddings
+        if table_name not in existing_tables and table_name != "terra_audio" and table_name not in processed_tables:
+            # Table does not exist, is not "terra_audio", and has not been processed yet, create it and store embeddings
             print(f"New table created: '{table_name}'")
             create_and_store_embeddings(cursor, conn, table_name, transcript)
+            existing_tables.append(table_name)  # Add the created table to the list of existing tables
+            processed_tables.add(table_name)  # Add the table to the set of processed tables
         elif table_name != "terra_audio":
             # Table exists and is not "terra_audio", check if title has a corresponding row
             cursor.execute(
