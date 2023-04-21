@@ -20,7 +20,7 @@ def connect_to_db():
 def fetch_existing_urls(conn):
     print('Fetching existing URLs...')
     with conn.cursor() as cur:
-        cur.execute('SELECT url FROM terra_audio ORDER BY id DESC LIMIT 250;')
+        cur.execute('SELECT url FROM terra_audio ORDER BY id DESC;')
         return [row[0] for row in cur.fetchall()]
 
 def insert_new_entry(conn, title, url):
